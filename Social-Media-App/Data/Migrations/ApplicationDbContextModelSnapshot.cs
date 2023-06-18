@@ -4,7 +4,6 @@ namespace Social_Media_App.Data.Migrations
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
     using Social_Media_App.Data;
     using System;
 
