@@ -32,7 +32,7 @@ namespace Social_Media_App
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             }).AddRazorRuntimeCompilation();
         }
-
+      
         private static void Configure(WebApplication app)
         {
             using (var scope = app.Services.CreateScope())
