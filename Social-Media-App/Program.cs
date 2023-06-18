@@ -31,7 +31,7 @@ namespace Social_Media_App
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             }).AddRazorRuntimeCompilation();
         }
-
+      
         private static void Configure(WebApplication app)
         {
             if (app.Environment.IsDevelopment())
