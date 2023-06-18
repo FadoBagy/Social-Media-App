@@ -1,39 +1,39 @@
 namespace Social_Media_App
 {
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Social_Media_App.Data;
-    using Social_Media_App.Infrastructure;
 
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
-
+            ConfigureServices(builder.Services, builder.Configuration);
             var app = builder.Build();
+            Configure(app);
+            app.Run();
+        }
 
-            using (var scope = app.Services.CreateScope())
+        private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDefaultIdentity<IdentityUser>(IdentityOptionsProvider.GetIdentityOptions)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddControllersWithViews(options =>
             {
-                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            }).AddRazorRuntimeCompilation();
+        }
 
-                // Check if the database is empty
-                if (!dbContext.Chats.Any()) // Replace 'YourEntities' with your actual DbSet property
-                {
-                    // If it's empty, call the GenerateAsync method
-                    DatabaseGenerator.GenerateAsync(dbContext).GetAwaiter().GetResult();
-                }
-            }
-
-            // Configure the HTTP request pipeline.
+        private static void Configure(WebApplication app)
+        {
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
@@ -41,7 +41,6 @@ namespace Social_Media_App
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -51,13 +50,10 @@ namespace Social_Media_App
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
-
-            app.Run();
         }
     }
 }
