@@ -3,6 +3,7 @@ namespace Social_Media_App
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Social_Media_App.Data;
+    using Social_Media_App.Infrastructure;
 
     public class Program
     {
@@ -19,6 +20,18 @@ namespace Social_Media_App
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                // Check if the database is empty
+                if (!dbContext.Chats.Any()) // Replace 'YourEntities' with your actual DbSet property
+                {
+                    // If it's empty, call the GenerateAsync method
+                    DatabaseGenerator.GenerateAsync(dbContext).GetAwaiter().GetResult();
+                }
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

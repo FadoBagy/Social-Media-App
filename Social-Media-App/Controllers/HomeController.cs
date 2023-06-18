@@ -1,6 +1,8 @@
 ﻿namespace Social_Media_App.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Social_Media_App.Data;
+    using Social_Media_App.Infrastructure;
     using Social_Media_App.Models;
     using System.Diagnostics;
 
