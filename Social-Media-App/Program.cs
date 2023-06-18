@@ -25,13 +25,13 @@ namespace Social_Media_App
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-           
+
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             }).AddRazorRuntimeCompilation();
         }
-
+      
         private static void Configure(WebApplication app)
         {
             if (app.Environment.IsDevelopment())
