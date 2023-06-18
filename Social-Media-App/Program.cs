@@ -4,6 +4,7 @@ namespace Social_Media_App
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Social_Media_App.Data;
+    using Social_Media_App.Infrastructure;
 
     public class Program
     {
@@ -34,6 +35,16 @@ namespace Social_Media_App
 
         private static void Configure(WebApplication app)
         {
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                if (!dbContext.Chats.Any())
+                {
+                    DatabaseGenerator.GenerateAsync(dbContext).GetAwaiter().GetResult();
+                }
+            }
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
