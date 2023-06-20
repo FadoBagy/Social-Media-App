@@ -38,6 +38,7 @@ namespace Social_Media_App
             using (var scope = app.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
 
                 if (!dbContext.Chats.Any())
                 {
