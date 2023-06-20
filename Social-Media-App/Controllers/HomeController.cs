@@ -11,6 +11,7 @@
         public IActionResult Index()
         {
             return View();
+            //return View("~/Views/Chat/Chat.cshtml"); To Check The Chat.cshtml
         }
 
         public IActionResult Privacy()

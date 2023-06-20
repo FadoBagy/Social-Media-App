@@ -1,48 +1,65 @@
-﻿<style>
-    .chat-panel {
-        height: 500px;
-        overflow-y: scroll;
-    }
-
-    .message {
-        width: 70%;
-        margin: 10px;
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .outgoing {
-        background-color: #0084ff;
-        color: white;
-        margin-left: auto;
-    }
-
-    .incoming {
-        background-color: #e5e5ea;
-        color: black;
-    }
-
-    .input-group {
-        width: 70%;
-    }
-</style>
-
-<div class="container-fluid">
+﻿<div class="container">
     <div class="row">
-        <div class="col-12 col-md-4">
-            <div class="chat-panel">
-                <!-- Repeat this div for each chat -->
-                <div class="chat">
-                    <img src="chat_image.jpg" alt="Chat Image">
-                    <h5>Chat Title</h5>
+        <div id="chats-panel" class="col-12 col-md-4">
+            <div class="chat">
+                <img src="https://www.looper.com/img/gallery/why-hugh-laurie-was-never-the-same-after-house/intro-1567096480.jpg" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Hugh Laurie</h5>
+                    <p>Last message in the chat...</p>
+                    <small>2 minutes ago</small>
+                </div>
+            </div>
+            <div class="chat">
+                <img src="https://variety.com/wp-content/uploads/2022/02/Cillian-Murphy-Peaky-Blinders-1.jpg?w=1000" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Cillian Murphy</h5>
+                    <p>Last message in the chat...</p>
+                    <small>3 minutes ago</small>
+                </div>
+            </div>
+            <div class="chat">
+                <img src="https://media.vanityfair.com/photos/624c8bd2004978a71edce56d/3:2/w_3998,h_2665,c_limit/1198930383" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Selena Gomez</h5>
                     <p>Last message in the chat...</p>
                     <small>5 minutes ago</small>
+                </div>
+            </div>
+            <div class="chat">
+                <img src="https://imageio.forbes.com/specials-images/imageserve/6080aa17b3e5a1188be76765/62nd-Annual-Grammy-Awards---Arrivals/960x0.jpg?format=jpg&width=960" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Ariana Grande</h5>
+                    <p>Last message in the chat...</p>
+                    <small>7 minutes ago</small>
+                </div>
+            </div>
+            <div class="chat">
+                <img src="https://ca-times.brightspotcdn.com/dims4/default/ece46e6/2147483647/strip/true/crop/1960x1234+0+0/resize/1200x756!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb8%2F5e%2Fc778bd834a9bbcbb55f844250792%2Fu-s-premiere-of-avatar-the-way-of-water-88166.jpg" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Abel Tesfaye</h5>
+                    <p>Last message in the chat...</p>
+                    <small>19 minutes ago</small>
+                </div>
+            </div>
+            <div class="chat">
+                <img src="https://static01.nyt.com/images/2020/02/24/arts/24billboard-item/24billboard-item-mediumSquareAt3X.jpg" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Justin Bieber</h5>
+                    <p>Last message in the chat...</p>
+                    <small>25 minutes ago</small>
+                </div>
+            </div>
+            <div class="chat">
+                <img src="https://stylecaster.com/wp-content/uploads/2022/02/eminem-net-worth.png?w=960&h=540&crop=1" alt="Chat Image">
+                <div class="chat-content">
+                    <h5>Eminem</h5>
+                    <p>Last message in the chat...</p>
+                    <small>31 minutes ago</small>
                 </div>
             </div>
         </div>
         <div class="col-12 col-md-8">
             <div class="chat-panel">
-                <!-- Repeat this div for each message -->
                 <div class="message outgoing">
                     Message sent by current user
                 </div>
