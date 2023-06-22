@@ -4,6 +4,7 @@ namespace Social_Media_App
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Social_Media_App.Data;
+    using Social_Media_App.Data.Models;
     using Social_Media_App.Infrastructure;
 
     public class Program
@@ -22,7 +23,7 @@ namespace Social_Media_App
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(IdentityOptionsProvider.GetIdentityOptions)
+            services.AddDefaultIdentity<User>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -32,7 +33,7 @@ namespace Social_Media_App
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             }).AddRazorRuntimeCompilation();
         }
-      
+
         private static void Configure(WebApplication app)
         {
             using (var scope = app.Services.CreateScope())
@@ -61,8 +62,8 @@ namespace Social_Media_App
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
