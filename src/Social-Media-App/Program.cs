@@ -1,6 +1,5 @@
 namespace Social_Media_App
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Social_Media_App.Data;
@@ -12,14 +11,24 @@ namespace Social_Media_App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            ConfigureServices(builder.Services, builder.Configuration);
+            ConfigureServices(builder);
             var app = builder.Build();
             Configure(app);
             app.Run();
         }
 
-        private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        private static void ConfigureServices(WebApplicationBuilder builder)
         {
+            var services = builder.Services;
+            var configuration = builder.Configuration;
+            var environment = builder.Environment;
+
+            configuration
+                .SetBasePath(environment.ContentRootPath)
+                .AddJsonFile("Data/appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"Data/appsettings.{environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
