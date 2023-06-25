@@ -1,10 +1,14 @@
 namespace Social_Media_App
 {
+    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Social_Media_App.Data;
     using Social_Media_App.Data.Models;
     using Social_Media_App.Infrastructure;
+    using Social_Media_App.Services.Email;
+    using Social_Media_App.Services;
+    using System.Configuration;
 
     public class Program
     {
@@ -22,6 +26,9 @@ namespace Social_Media_App
             var services = builder.Services;
             var configuration = builder.Configuration;
             var environment = builder.Environment;
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(configuration);
 
             configuration
                 .SetBasePath(environment.ContentRootPath)
