@@ -1,0 +1,52 @@
+﻿.chat-panel {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+#chats-panel {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.message {
+    width: 70%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.outgoing {
+    background-color: #0084ff;
+    color: white;
+    margin-left: auto;
+}
+
+.incoming {
+    background-color: #e6e6e6;
+}
+
+.chat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.50em;
+}
+
+.chat img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.chat > .chat-content > p {
+    margin: 0.1em;
+}
+
+.chat > .chat-content > h5 {
+    margin: 0.1em;
+}
+
+.chat-content {
+    display: flex;
+    flex-direction: column;
+}
