@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/Social-Media-App/Areas/Identity/Pages/Account/Login.cshtml
+/src/Social-Media-App/Areas/Identity/Pages/Account/Register.cshtml
