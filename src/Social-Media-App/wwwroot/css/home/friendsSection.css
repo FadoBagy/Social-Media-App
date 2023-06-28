@@ -1,0 +1,58 @@
+﻿.friends {
+    width: 20%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.friend-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.friend {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 5px;
+    position: relative;
+    transition: 150ms;
+    cursor: pointer;
+}
+
+.friend:hover {
+    background-color: #22283125;
+}
+
+.friend img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.friend p {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.friend .activity-status {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    z-index: -1;
+}
+
+.active {
+    background-color: #6bd178;
+}
