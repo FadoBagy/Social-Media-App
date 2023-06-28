@@ -1,7 +1,133 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-</div>
+<section class="main-container">
+    <section class="feed">
+        <section class="posts">
+            <article class="post">
+                <div class="info">
+                    <img src="https://variety.com/wp-content/uploads/2022/02/Cillian-Murphy-Peaky-Blinders-1.jpg?w=1000" />
+                    <p>Cillian Murphy</p>
+                    <time>9min</time>
+                </div>
+                <img class="post-image" src="https://pbs.twimg.com/media/FQOAZTkXMAchCQB.jpg" alt="Post image" />
+                <div class="actions">
+                    <div>
+                        <img src="~/img/feed/like.png"/>
+                        <p>50k</p>
+                    </div>
+                    <div>
+                        <img src="~/img/feed/comment.png" />
+                        <p>3042</p>
+                    </div>
+                    <div>
+                        <img src="~/img/feed/share.png" />
+                        <p>20k</p>
+                    </div>
+                </div>
+                <div class="caption">
+                    <p>Cillian Murphy</p>
+                    <p>Filming something special 🧐</p>
+                </div>
+                <div class="comments-preview">
+                    <p>View comments</p>
+                </div>
+            </article>
+            <article class="post">
+                <div class="info">
+                    <img src="https://www.looper.com/img/gallery/why-hugh-laurie-was-never-the-same-after-house/intro-1567096480.jpg" />
+                    <p>Hugh Laurie</p>
+                    <time>18min</time>
+                </div>
+                <img class="post-image" src="https://image.tmdb.org/t/p/w500/lpu443aKW5aKzVnV4xjiqvD1DnK.jpg" alt="Post image" />
+                <div class="actions">
+                    <div>
+                        <img src="~/img/feed/like.png" />
+                        <p>5890</p>
+                    </div>
+                    <div>
+                        <img src="~/img/feed/comment.png" />
+                        <p>249</p>
+                    </div>
+                    <div>
+                        <img src="~/img/feed/share.png" />
+                        <p>150</p>
+                    </div>
+                </div>
+                <div class="caption">
+                    <p>Hugh Laurie</p>
+                    <p>Feeling cute, might delete later</p>
+                </div>
+                <div class="comments-preview">
+                    <p>View comments</p>
+                </div>
+            </article>
+            <article class="post">
+                <div class="info">
+                    <img src="https://ca-times.brightspotcdn.com/dims4/default/ece46e6/2147483647/strip/true/crop/1960x1234+0+0/resize/1200x756!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb8%2F5e%2Fc778bd834a9bbcbb55f844250792%2Fu-s-premiere-of-avatar-the-way-of-water-88166.jpg" />
+                    <p>Abel Tesfaye</p>
+                    <time>2h</time>
+                </div>
+                <img class="post-image" src="https://preview.redd.it/yp10daw930j71.jpg?auto=webp&s=2dc35e3a20e8fbc413ac4f7eeebed8e73231af8b" alt="Post image" />
+                <div class="actions">
+                    <div>
+                        <img src="~/img/feed/like.png" />
+                        <p>110k</p>
+                    </div>
+                    <div>
+                        <img src="~/img/feed/comment.png" />
+                        <p>9851</p>
+                    </div>
+                    <div>
+                        <img src="~/img/feed/share.png" />
+                        <p>50k</p>
+                    </div>
+                </div>
+                <div class="caption">
+                    <p>Abel Tesfaye</p>
+                    <p>Food is not just nourishment, it's a language of love and comfort. Bon appétit!</p>
+                </div>
+                <div class="comments-preview">
+                    <p>View comments</p>
+                </div>
+            </article>
+        </section>
+    </section>
+    <section class="friends">
+        <h2>Friends</h2>
+        <ul class ="friend-list">
+            <li class="friend">
+                <img src="https://www.looper.com/img/gallery/why-hugh-laurie-was-never-the-same-after-house/intro-1567096480.jpg" />
+                <p>Hugh Laurie</p>
+                <span class="activity-status active"></span>
+            </li>
+            <li class="friend">
+                <img src="https://variety.com/wp-content/uploads/2022/02/Cillian-Murphy-Peaky-Blinders-1.jpg?w=1000" />
+                <p>Cillian Murphy</p>
+                <span class="activity-status active"></span>
+            </li>
+            <li class="friend">
+                <img src="https://media.vanityfair.com/photos/624c8bd2004978a71edce56d/3:2/w_3998,h_2665,c_limit/1198930383" />
+                <p>Selena Gomez</p>
+                <span class="activity-status"></span>
+            </li>
+            <li class="friend">
+                <img src="https://imageio.forbes.com/specials-images/imageserve/6080aa17b3e5a1188be76765/62nd-Annual-Grammy-Awards---Arrivals/960x0.jpg?format=jpg&width=960" />
+                <p>Ariana Grande</p>
+                <span class="activity-status active"></span>
+            </li>
+            <li class="friend">
+                <img src="https://ca-times.brightspotcdn.com/dims4/default/ece46e6/2147483647/strip/true/crop/1960x1234+0+0/resize/1200x756!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb8%2F5e%2Fc778bd834a9bbcbb55f844250792%2Fu-s-premiere-of-avatar-the-way-of-water-88166.jpg" />
+                <p>Abel Tesfaye</p>
+                <span class="activity-status"></span>
+            </li>
+        </ul>
+    </section>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home/home.css" />
+    <link rel="stylesheet" href="~/css/home/friendsSection.css" />
+    <link rel="stylesheet" href="~/css/home/feed.css" />
+}

@@ -6,9 +6,8 @@ namespace Social_Media_App
     using Social_Media_App.Data;
     using Social_Media_App.Data.Models;
     using Social_Media_App.Infrastructure;
-    using Social_Media_App.Services.Email;
     using Social_Media_App.Services;
-    using System.Configuration;
+    using Social_Media_App.Services.Email;
 
     public class Program
     {

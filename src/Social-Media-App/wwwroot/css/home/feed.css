@@ -1,0 +1,113 @@
+﻿.feed {
+    width: 80%;
+}
+
+.posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+}
+
+.post {
+    width: 800px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.post p {
+    margin: 0;
+}
+
+.post .info {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+    background-color: #222831;
+}
+
+.post .info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+}
+
+.post .info p {
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.post .post-image {
+    max-width: 100%;
+    max-height: 600px;
+    width: auto;
+    height: auto;
+}
+
+.post .actions {
+    width: 100%;
+    background-color: #222831;
+    padding: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.actions div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.post .actions img {
+    width: 25px;
+    cursor: pointer;
+}
+
+.post .caption {
+    width: 100%;
+    background-color: #222831;
+    padding: 0 10px 0px 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.post .caption :nth-child(1) {
+    cursor: pointer;
+    font-weight: bold;
+    transition: 150ms;
+}
+
+.post .comments-preview {
+    width: 100%;
+    background-color: #222831;
+    border-radius: 0 0 5px 5px;
+    padding: 0 10px 10px 10px;
+    display: flex;
+}
+
+.post .comments-preview p {
+    width: fit-content;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.post .info :nth-child(2):hover,
+.post .caption :nth-child(1):hover,
+.post .comments-preview p:hover {
+    color: #bababaff;
+}
