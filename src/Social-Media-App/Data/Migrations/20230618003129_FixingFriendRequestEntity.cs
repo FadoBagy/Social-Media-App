@@ -1,13 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
-
+﻿#nullable disable
 namespace SocialMediaApp.Migrations
 {
-    /// <inheritdoc />
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class FixingFriendRequestEntity : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
@@ -15,7 +12,6 @@ namespace SocialMediaApp.Migrations
                 table: "FriendRequests");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(

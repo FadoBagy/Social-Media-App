@@ -1,13 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
-
+﻿#nullable disable
 namespace SocialMediaApp.Migrations
 {
-    /// <inheritdoc />
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddedRestrictionsAddedPrivateOptionAndBackgroundImageToUser : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
@@ -41,7 +38,6 @@ namespace SocialMediaApp.Migrations
                 nullable: true);
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(

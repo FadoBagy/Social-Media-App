@@ -8,6 +8,8 @@ namespace Social_Media_App
     using Social_Media_App.Infrastructure;
     using Social_Media_App.Services;
     using Social_Media_App.Services.Email;
+    using Social_Media_App.Services.File;
+    using Social_Media_App.Services.Post;
 
     public class Program
     {
@@ -27,6 +29,8 @@ namespace Social_Media_App
             var environment = builder.Environment;
 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IFileService, FileService>();
             services.Configure<AuthMessageSenderOptions>(configuration);
 
             configuration

@@ -6,7 +6,6 @@
     public class Chat
     {
         public int Id { get; set; }
-
         [Required]
         [MaxLength(TitleLength)]
         public string Title { get; set; }

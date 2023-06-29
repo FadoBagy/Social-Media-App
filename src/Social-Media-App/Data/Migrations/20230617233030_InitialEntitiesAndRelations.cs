@@ -1,14 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
-
+﻿#nullable disable
 namespace SocialMediaApp.Migrations
 {
-    /// <inheritdoc />
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialEntitiesAndRelations : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
@@ -202,7 +198,6 @@ namespace SocialMediaApp.Migrations
                 column: "FriendId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
