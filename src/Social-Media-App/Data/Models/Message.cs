@@ -2,10 +2,10 @@
 {
     using System.ComponentModel.DataAnnotations;
     using static DataConstants.Message;
+
     public class Message
     {
         public int Id { get; set; }
-
         [Required]
         [MaxLength(ContentLength)]
         public string Content { get; set; }

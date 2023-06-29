@@ -1,0 +1,31 @@
+﻿@model FormPostModel
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<div>
+    <h2>Upload an image</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <label asp-for="Image">Select Image:</label>
+            <input asp-for="Image" type="file" id="Image" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label asp-for="Caption">Caption:</label>
+            <textarea asp-for="Caption" id="Caption"></textarea>
+            <span asp-validation-for="Caption" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
