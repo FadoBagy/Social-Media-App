@@ -2,6 +2,6 @@
 {
     public interface IFileService
     {
-        public string SaveImage(IFormFile image, string userId);
+        public Task<string> SaveImage(IFormFile image, string userId);
     }
 }

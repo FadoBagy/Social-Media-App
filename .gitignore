@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Development Data
-wwwroot/uploads/
+/src/Social-Media-App/wwwroot/uploads

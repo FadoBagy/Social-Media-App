@@ -1,0 +1,109 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<section class="user-info">
+    <h2>@Model.Username</h2>
+    <a asp-area="" asp-controller="Post" asp-action="Create">Create Post</a>
+</section>
+<section class="user-posts">
+    @foreach (var post in Model.Posts)
+    {
+        <article class="post">
+            <img class="post-image" src="~/uploads/@post.ImagePath" alt="Post image" />
+            <div class="post-stats">
+                <div>
+                    <img src="~/img/feed/like.png" />
+                    <p>@post.Likes.Count</p>
+                </div>
+                <div>
+                    <img src="~/img/feed/comment.png" />
+                    <p>@post.Comments.Count</p>
+                </div>
+                <div>
+                    <img src="~/img/feed/share.png" />
+                    <p>20k</p>
+                </div>
+            </div>
+        </article>
+    }
+    <article class="post">
+        <img class="post-image" src="https://pbs.twimg.com/media/FQOAZTkXMAchCQB.jpg" alt="Post image" />
+        <div class="post-stats">
+            <div>
+                <img src="~/img/feed/like.png" />
+                <p>50k</p>
+            </div>
+            <div>
+                <img src="~/img/feed/comment.png" />
+                <p>3042</p>
+            </div>
+            <div>
+                <img src="~/img/feed/share.png" />
+                <p>20k</p>
+            </div>
+        </div>
+    </article>
+    <article class="post">
+        <img class="post-image" src="https://image.tmdb.org/t/p/w500/lpu443aKW5aKzVnV4xjiqvD1DnK.jpg" alt="Post image" />
+        <div class="post-stats">
+            <div>
+                <img src="~/img/feed/like.png" />
+                <p>50k</p>
+            </div>
+            <div>
+                <img src="~/img/feed/comment.png" />
+                <p>3042</p>
+            </div>
+            <div>
+                <img src="~/img/feed/share.png" />
+                <p>20k</p>
+            </div>
+        </div>
+    </article>
+    <article class="post">
+        <img class="post-image" src="https://preview.redd.it/yp10daw930j71.jpg?auto=webp&s=2dc35e3a20e8fbc413ac4f7eeebed8e73231af8b" alt="Post image" />
+        <div class="post-stats">
+            <div>
+                <img src="~/img/feed/like.png" />
+                <p>50k</p>
+            </div>
+            <div>
+                <img src="~/img/feed/comment.png" />
+                <p>3042</p>
+            </div>
+            <div>
+                <img src="~/img/feed/share.png" />
+                <p>20k</p>
+            </div>
+        </div>
+    </article>
+</section>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

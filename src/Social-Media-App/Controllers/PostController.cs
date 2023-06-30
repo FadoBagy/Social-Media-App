@@ -30,7 +30,7 @@
             {
                 string userId = User.Id();
 
-                var fileName = file.SaveImage(model.Image, userId);
+                var fileName = file.SaveImage(model.Image, userId).Result;
 
                 var newPost = post.CreatePost(Path.Combine(userId, fileName), model.Caption, userId);
                 post.AddPost(newPost);
