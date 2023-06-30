@@ -1,0 +1,10 @@
+﻿.user-info {
+    background-color: #222831;
+    color: #f2f2f2;
+    border-radius: 5px 5px 0 0;
+    padding: 50px 10px 50px 10px;
+}
+
+.user-info h2{
+    margin: 0;
+}

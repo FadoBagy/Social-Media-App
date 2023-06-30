@@ -4,7 +4,7 @@
 
     public class FileService : IFileService
     {
-        public string SaveImage(IFormFile image, string userId)
+        public async Task<string> SaveImage(IFormFile image, string userId)
         {
             // Create a dedicated folder for the user within the "uploads" folder if it doesn't exist
             var userFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", userId);
@@ -19,7 +19,7 @@
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                image.CopyToAsync(stream);
+                await image.CopyToAsync(stream);
             }
 
             return fileName;
