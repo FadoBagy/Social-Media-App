@@ -24,9 +24,14 @@
             return new Post
             {
                 ImagePath = imagePath,
-                Caption = caption,
+                Caption = caption?.TrimEnd(),
                 UserId = userId
             };
+        }
+
+        public Post GetPost(int id)
+        {
+            return data.Posts.Find(id);
         }
 
         public List<GalleryPostViewModel> GetPostsByUserId(string userId)

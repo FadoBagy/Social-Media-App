@@ -1,0 +1,42 @@
+﻿@model PostViewModel
+@{
+    string username = Model.User.UserName[..Model.User.UserName.IndexOf('@')];
+    string creationDate = Model.CreationDate.ToString("MMMM dd, yy");
+    string creationTime = Model.CreationDate.ToString("h:mmtt");
+
+    int likeCount = Model.Likes?.Count ?? 0;
+    int commentsCount = Model.Comments?.Count ?? 0;
+}
+
+<article class="post">
+    <div class="info">
+        <img src="@Model.User.ProfileImage" />
+        <p>@username</p>
+        <span>•</span>
+        <time>@creationDate</time>
+        <span>•</span>
+        <time>UTC @creationTime</time>
+    </div>
+    <img class="post-image" src="/uploads/@Model.ImagePath" alt="Post image" />
+    <div class="actions">
+        <div>
+            <img src="~/img/feed/like.png" />
+            <p>@likeCount</p>
+        </div>
+        <div>
+            <img src="~/img/feed/comment.png" />
+            <p>@commentsCount</p>
+        </div>
+        <div>
+            <img src="~/img/feed/share.png" />
+            <p>20k</p>
+        </div>
+    </div>
+    <div class="caption">
+        <p>@username</p>
+        <p>@Model.Caption</p>
+    </div>
+    <div class="comments-preview">
+        <p>View comments</p>
+    </div>
+</article>

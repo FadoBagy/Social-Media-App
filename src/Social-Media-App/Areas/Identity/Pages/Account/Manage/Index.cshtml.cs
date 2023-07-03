@@ -44,7 +44,7 @@ namespace Social_Media_App.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName.Substring(0, userName.IndexOf('@'));
+            Username = userName;
             Posts = _post.GetPostsByUserId(user.Id);
 
             Input = new InputModel
