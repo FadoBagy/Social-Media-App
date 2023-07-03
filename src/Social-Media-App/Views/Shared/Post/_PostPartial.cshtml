@@ -10,8 +10,12 @@
 
 <article class="post">
     <div class="info">
-        <img src="@Model.User.ProfileImage" />
-        <p>@username</p>
+        <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
+            <img src="@Model.User.ProfileImage" />
+        </a>
+        <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
+            <p>@username</p>
+        </a>
         <span>•</span>
         <time>@creationDate</time>
         <span>•</span>
@@ -33,7 +37,9 @@
         </div>
     </div>
     <div class="caption">
-        <p>@username</p>
+        <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
+            <p>@username</p>
+        </a>
         <p>@Model.Caption</p>
     </div>
     <div class="comments-preview">

@@ -12,17 +12,14 @@
     [Authorize]
     public class PostController : Controller
     {
-        private readonly UserManager<User> userManager;
         private readonly IPostService post;
         private readonly IFileService file;
         public PostController(
             IPostService post, 
-            IFileService file,
-            UserManager<User> userManager)
+            IFileService file)
         {
             this.post = post;
             this.file = file;
-            this.userManager = userManager;
         }
 
         public IActionResult Create()
@@ -49,8 +46,11 @@
         public IActionResult View(int id)
         {
             var currentPost = post.GetPost(id);
-            var currentUser = userManager.GetUserAsync(HttpContext.User).Result;
 
+            if (currentPost == null)
+            {
+                return NotFound();
+            }
             return View(new PostViewModel
             {
                 ImagePath = currentPost.ImagePath,
@@ -58,7 +58,7 @@
                 CreationDate = currentPost.CreationDate,
                 Likes = currentPost.Likes,
                 Comments = currentPost.Comments,
-                User = currentUser
+                User = currentPost.User
             });
         }
     }

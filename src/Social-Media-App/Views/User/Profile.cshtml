@@ -1,0 +1,33 @@
+﻿@model UserProfileViewModel
+@inject UserManager<User> UserManager
+@{
+	ViewData["Title"] = Model.User.Username;
+}
+
+<section class="main-container">
+    <section class="user-info">
+        <h2>@Model.User.Username[..Model.User.Username.IndexOf('@')]</h2>
+        @if (UserManager.GetUserId(User) == Model.User.Id)
+        {
+            <a asp-area="" asp-controller="Post" asp-action="Create">Create Post</a>
+        }
+    </section>
+    <section class="user-posts">
+        @if (Model?.Posts.Count > 0)
+        {
+            @foreach (var post in Model.Posts)
+            {
+                <partial name="Post/_PostGalleryPartial" model="@post" />
+            }
+        }
+        else
+        {
+            <p>No posts yet..</p>
+        }
+    </section>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/user/profileGallery.css" />
+    <link rel="stylesheet" href="~/css/user/userProfile.css" />
+}
