@@ -247,7 +247,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
                 });
 
             modelBuilder.Entity("Social_Media_App.Data.Models.Comment", b =>
@@ -279,7 +279,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Social_Media_App.Data.Models.FriendRequest", b =>
@@ -314,7 +314,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FriendRequests");
+                    b.ToTable("FriendRequests", (string)null);
                 });
 
             modelBuilder.Entity("Social_Media_App.Data.Models.Like", b =>
@@ -341,7 +341,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("Social_Media_App.Data.Models.Message", b =>
@@ -373,7 +373,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("Social_Media_App.Data.Models.Post", b =>
@@ -403,7 +403,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("UserChats", b =>
@@ -418,7 +418,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("UserChats");
+                    b.ToTable("UserChats", (string)null);
                 });
 
             modelBuilder.Entity("UserFriends", b =>
@@ -433,7 +433,7 @@ namespace SocialMediaApp.Migrations
 
                     b.HasIndex("FriendId");
 
-                    b.ToTable("UserFriends");
+                    b.ToTable("UserFriends", (string)null);
                 });
 
             modelBuilder.Entity("Social_Media_App.Data.Models.User", b =>

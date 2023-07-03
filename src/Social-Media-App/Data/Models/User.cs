@@ -3,12 +3,11 @@
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Xml.Linq;
     using static DataConstants.User;
     public class User : IdentityUser
     {
         [Required]
-        public string ProfileImage { get; set; }
+        public string ProfileImage { get; set; } = "/img/user/defaultUserIcon.jpg";
         [Required]
         public string BackgroundImage { get; set; }
         public DateTime CreatedDate { get; set; }
