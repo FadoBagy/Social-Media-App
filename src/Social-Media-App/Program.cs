@@ -10,6 +10,7 @@ namespace Social_Media_App
     using Social_Media_App.Services.Email;
     using Social_Media_App.Services.File;
     using Social_Media_App.Services.Post;
+    using Social_Media_App.Services.User;
 
     public class Program
     {
@@ -31,6 +32,7 @@ namespace Social_Media_App
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IUserService, UserService>();
             services.Configure<AuthMessageSenderOptions>(configuration);
 
             configuration
@@ -85,6 +87,7 @@ namespace Social_Media_App
             app.UseAuthorization();
 
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute("user", "{controller=User}/{action=Details}/{id?}");
             app.MapRazorPages();
         }
     }
