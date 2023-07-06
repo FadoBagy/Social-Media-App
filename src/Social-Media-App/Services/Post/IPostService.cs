@@ -10,5 +10,6 @@
         public Post GetPost(int id);
         public List<GalleryPostViewModel> GetPostsForGalleryByUserId(string userId);
         public List<PostViewModel> GetPostsByUserId(string userId);
+        public List<PostViewModel> GetAllPosts();
     }
 }

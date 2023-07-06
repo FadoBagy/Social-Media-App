@@ -2,7 +2,7 @@
 @{
     string username = Model.User.UserName[..Model.User.UserName.IndexOf('@')];
     string titleCaption =
-        Model.Caption?.Length >= 20 ?
+        Model.Caption?.Length > 20 ?
         Model.Caption[..20] + "..." :
         Model.Caption;
 
