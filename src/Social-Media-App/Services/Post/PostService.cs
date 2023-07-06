@@ -67,5 +67,22 @@
                 })
                 .ToList();
         }
+
+        public List<PostViewModel> GetAllPosts()
+        {
+            return data.Posts
+                .Include(p => p.User)
+                .OrderByDescending(p => p.CreationDate)
+                .Select(p => new PostViewModel
+                {
+                    ImagePath = p.ImagePath,
+                    Caption = p.Caption,
+                    CreationDate = p.CreationDate,
+                    Likes = p.Likes,
+                    Comments = p.Comments,
+                    User = p.User
+                })
+                .ToList();
+        }
     }
 }
