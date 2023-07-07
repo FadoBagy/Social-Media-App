@@ -444,6 +444,9 @@ namespace SocialMediaApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ChatHubConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -459,6 +462,9 @@ namespace SocialMediaApp.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("NotificationHubConnectionId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileImage")
                         .IsRequired()
