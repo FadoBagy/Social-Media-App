@@ -14,5 +14,7 @@
         public Task<User> GetCurrentUserAsync();
 
         public string GetCurrentUserId();
+      
+        public User GetUserById(string id);
     }
 }

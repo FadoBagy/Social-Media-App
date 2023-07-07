@@ -5,7 +5,6 @@
     using Social_Media_App.Data.Models;
     using Social_Media_App.Hubs.Enums;
     using System.Security.Claims;
-
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext data;
@@ -86,6 +85,11 @@
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             return userId;
+        }
+
+        public User GetUserById(string id)
+        {
+            return data.Users.FirstOrDefault(u => u.Id == id);
         }
     }
 }

@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\" />
+    <Folder Include="wwwroot\uploads\eef6ef88-8194-4b5a-ac6c-2c578f550256\" />
   </ItemGroup>
 
 </Project>

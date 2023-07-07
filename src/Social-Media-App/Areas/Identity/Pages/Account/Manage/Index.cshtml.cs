@@ -13,16 +13,13 @@ namespace Social_Media_App.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IPostService _post;
 
         public IndexModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            IPostService postService)
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _post = postService;
         }
 
         public string Username { get; set; }
@@ -30,7 +27,6 @@ namespace Social_Media_App.Areas.Identity.Pages.Account.Manage
         public string StatusMessage { get; set; }
         [BindProperty]
         public InputModel Input { get; set; }
-        public List<GalleryPostViewModel> Posts { get; set; }
 
         public class InputModel
         {
@@ -44,8 +40,7 @@ namespace Social_Media_App.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName.Substring(0, userName.IndexOf('@'));
-            Posts = _post.GetPostsByUserId(user.Id);
+            Username = userName;
 
             Input = new InputModel
             {

@@ -26,6 +26,10 @@
     margin: 0;
 }
 
+.post a {
+    all: unset;
+}
+
 .post .info {
     width: 100%;
     display: flex;

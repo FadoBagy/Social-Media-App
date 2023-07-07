@@ -7,6 +7,9 @@
     {
         public void AddPost(Post post);
         public Post CreatePost(string imagePath, string? caption, string userId);
-        public List<GalleryPostViewModel> GetPostsByUserId(string userId);
+        public Post GetPost(int id);
+        public List<GalleryPostViewModel> GetPostsForGalleryByUserId(string userId);
+        public List<PostViewModel> GetPostsByUserId(string userId);
+        public List<PostViewModel> GetAllPosts();
     }
 }

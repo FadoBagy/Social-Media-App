@@ -39,11 +39,12 @@ namespace Social_Media_App
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IUserService>(serviceProvider =>
-            {
-                var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
-                var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
-                return new UserService(dbContext, httpContextAccessor);
-            });
+              {
+                  var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+                  var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+                  return new UserService(dbContext, httpContextAccessor);
+              });
+          
             services.Configure<AuthMessageSenderOptions>(configuration);
 
             configuration
@@ -97,12 +98,13 @@ namespace Social_Media_App
 
                 app.UseAuthentication();
                 app.UseAuthorization();
-
+          
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapHub<ChatHub>("/chathub");
                     endpoints.MapHub<NotificationHub>("/notificationhub");
                     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute("user", "{controller=User}/{action=Details}/{id?}");
                     endpoints.MapRazorPages();
                 });
         }
