@@ -9,14 +9,20 @@ namespace Social_Media_App.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.SignalR.Client;
     using Social_Media_App.Data.Models;
+    using Social_Media_App.Infrastructure.Extensions;
+
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
-        public LoginModel(SignInManager<User> signInManager)
+        public LoginModel(SignInManager<User> signInManager,
+            UserManager<User> userManager)
         {
-            _signInManager = signInManager;
+            this._signInManager = signInManager;
+            this._userManager = userManager;
         }
         [BindProperty]
         public InputModel Input { get; set; }

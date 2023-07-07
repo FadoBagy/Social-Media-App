@@ -19,6 +19,8 @@
         [Required]
         [MaxLength(LastNameLength)]
         public string LastName { get; set; }
+        public string? ChatHubConnectionId { get; set; }
+        public string? NotificationHubConnectionId { get; set; }
 
         public List<User> Friends { get; set; }
         public List<Chat> Chats { get; set; }
