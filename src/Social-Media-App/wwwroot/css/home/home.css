@@ -2,3 +2,69 @@
     width: 100%;
     display: flex;
 }
+
+@media (max-width: 340px) {
+    footer {
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    footer .container {
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .post .info {
+        flex-direction: column;
+        gap: 3px;
+    }
+}
+
+@media (max-width: 576px) {
+    
+}
+
+@media (max-width: 800px) {
+    .post {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 989px) {
+    .container {
+        margin: 0;
+        max-width: 100% !important;
+    }
+
+    main {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 1199px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .friends {
+        width: 100% !important;
+        order: 1;
+        margin-bottom: 30px;
+    }
+
+    .friend-list {
+        flex-direction: row !important;
+        overflow: scroll;
+    }
+
+    .feed {
+        width: 100% !important;
+        order: 2;
+    }
+
+    .posts {
+        gap: 20px !important;
+    }
+}
