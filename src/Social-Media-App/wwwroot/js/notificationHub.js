@@ -1,4 +1,4 @@
-﻿var notificationConnection = new signalR.HubConnectionBuilder().withUrl('/notificationhub').build();
+﻿ var notificationConnection = new signalR.HubConnectionBuilder().withUrl('/notificationhub').build();
 
 notificationConnection.on('ReceiveNotification', function () {
     let chatElement = document.getElementById('chat');
