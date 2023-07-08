@@ -3,8 +3,8 @@
     using Microsoft.AspNetCore.SignalR;
     using Social_Media_App.Services.User;
     using Social_Media_App.Hubs.Enums;
-    using static HubsConstants.Chat;
     using Social_Media_App.Services.Chat;
+    using static HubsConstants.Chat;
 
     public class ChatHub : Hub
     {
@@ -37,7 +37,7 @@
             await base.OnDisconnectedAsync(exception);
         }
 
-        public async Task SendMessage()
+        public async Task SendMessage(string message, string senderId)
         {
             var userId = "76841979-fa41-4651-ac38-40d676727742";
             var user = await users.GetUserAsync(userId);
@@ -54,7 +54,7 @@
                 await Groups.AddToGroupAsync(Context.ConnectionId, chatTitle);
                 await Groups.AddToGroupAsync(user.ChatHubConnectionId, chatTitle);
 
-                await Clients.Group(chatTitle).SendAsync("ReceiveMessage");
+                await Clients.Group(chatTitle).SendAsync("ReceiveMessage", senderId, message);
             }
             else
             {
