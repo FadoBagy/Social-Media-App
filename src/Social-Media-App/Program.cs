@@ -8,6 +8,7 @@ namespace Social_Media_App
     using Social_Media_App.Hubs;
     using Social_Media_App.Infrastructure;
     using Social_Media_App.Services;
+    using Social_Media_App.Services.Chat;
     using Social_Media_App.Services.Email;
     using Social_Media_App.Services.File;
     using Social_Media_App.Services.Post;
@@ -44,7 +45,8 @@ namespace Social_Media_App
                   var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
                   return new UserService(dbContext, httpContextAccessor);
               });
-          
+            services.AddTransient<IChatService, ChatService>();
+
             services.Configure<AuthMessageSenderOptions>(configuration);
 
             configuration
