@@ -1,35 +1,41 @@
 ﻿@model PostViewModel
+@inject UserManager<User> UserManager
 @{
     string username = Model.User.UserName[..Model.User.UserName.IndexOf('@')];
     string creationDate = Model.CreationDate.ToString("MMMM dd, yy");
     string creationTime = Model.CreationDate.ToString("h:mmtt");
-
-    int likeCount = Model.Likes?.Count ?? 0;
-    int commentsCount = Model.Comments?.Count ?? 0;
 }
 
 <article class="post">
     <div class="info">
-        <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
-            <img src="@Model.User.ProfileImage" />
-        </a>
-        <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
-            <p>@username</p>
-        </a>
-        <span>•</span>
-        <time>@creationDate</time>
-        <span>•</span>
-        <time>UTC @creationTime</time>
+        <div class="details">
+            <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
+                <img src="@Model.User.ProfileImage" />
+            </a>
+            <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@Model.User.Id">
+                <p>@username</p>
+            </a>
+            <span>•</span>
+            <time>@creationDate</time>
+            <span>•</span>
+            <time>UTC @creationTime</time>
+        </div>
+        @if (Model.IsSinglePost && UserManager.GetUserId(User) == Model.User.Id)
+        {
+            <div class="options">
+                <img src="~/img/feed/settings-dots.png" />
+            </div>
+        }
     </div>
     <img class="post-image" src="/uploads/@Model.ImagePath" alt="Post image" />
     <div class="actions">
         <div>
             <img src="~/img/feed/like.png" />
-            <p>@likeCount</p>
+            <p>@(Model.Likes?.Count ?? 0)</p>
         </div>
         <div>
             <img src="~/img/feed/comment.png" />
-            <p>@commentsCount</p>
+            <p>@(Model.Comments?.Count ?? 0)</p>
         </div>
         <div>
             <img src="~/img/feed/share.png" />
@@ -46,3 +52,21 @@
         <p>View comments</p>
     </div>
 </article>
+@if (Model.IsSinglePost && UserManager.GetUserId(User) == Model.User.Id)
+{
+    <div class="options-panel">
+        <div class="panel">
+            <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id">
+                Change Caption
+            </a>
+            <form asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id">
+                <div>
+                    <input 
+                       type="submit" 
+                       value="Delete Permanently"
+                       onclick="return confirm('Are you sure you want to DELETE this post')" />
+                </div>
+            </form>
+        </div>
+    </div>
+}

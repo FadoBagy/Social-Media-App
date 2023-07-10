@@ -20,12 +20,24 @@
             data.SaveChanges();
         }
 
+        public void RemovePost(Post post)
+        {
+            data.Posts.Remove(post);
+            data.SaveChanges();
+        }
+
+        public void UpdatePost(Post post, FormPostModel model)
+        {
+            post.Caption = model?.Caption?.Trim();
+            data.SaveChanges();
+        }
+
         public Post CreatePost(string imagePath, string? caption, string userId)
         {
             return new Post
             {
                 ImagePath = imagePath,
-                Caption = caption?.TrimEnd(),
+                Caption = caption?.Trim(),
                 UserId = userId
             };
         }
