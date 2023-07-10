@@ -6,6 +6,8 @@
     public interface IPostService
     {
         public void AddPost(Post post);
+        public void RemovePost(Post post);
+        public void UpdatePost(Post post, FormPostModel model);
         public Post CreatePost(string imagePath, string? caption, string userId);
         public Post GetPost(int id);
         public List<GalleryPostViewModel> GetPostsForGalleryByUserId(string userId);

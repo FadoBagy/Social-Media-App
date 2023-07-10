@@ -1,9 +1,8 @@
 ﻿namespace Social_Media_App.Controllers
 {
+    using Humanizer.Localisation;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Social_Media_App.Data.Models;
     using Social_Media_App.Infrastructure.Extensions;
     using Social_Media_App.Models.Post;
     using Social_Media_App.Services.File;
@@ -32,11 +31,11 @@
         {
             if (ModelState.IsValid)
             {
-                string userId = User.Id();
+                string currentUserId = User.Id();
 
-                var fileName = file.SaveImage(model.Image, userId).Result;
+                var fileName = file.SaveImage(model.Image, currentUserId).Result;
 
-                var newPost = post.CreatePost(Path.Combine(userId, fileName), model.Caption, userId);
+                var newPost = post.CreatePost(Path.Combine(currentUserId, fileName), model.Caption, currentUserId);
                 post.AddPost(newPost);
             }
 
@@ -53,13 +52,81 @@
             }
             return View(new PostViewModel
             {
+                Id = currentPost.Id,
                 ImagePath = currentPost.ImagePath,
                 Caption = currentPost.Caption,
                 CreationDate = currentPost.CreationDate,
                 Likes = currentPost.Likes,
                 Comments = currentPost.Comments,
-                User = currentPost.User
+                User = currentPost.User,
+                IsSinglePost = true
             });
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var postToEdit = post.GetPost(id);
+            var currentUserId = User.Id();
+
+            if (postToEdit?.UserId != currentUserId)
+            {
+                //TempData["error"] = "You cannot edit this movie!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (postToEdit != null)
+            {
+                return View(new FormPostModel()
+                {
+                    Caption = postToEdit.Caption
+                });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, FormPostModel model)
+        {
+            var postToEdit = post.GetPost(id);
+            var currentUserId = User.Id();
+            if (postToEdit?.UserId != currentUserId)
+            {
+                TempData["error"] = "You cannot edit this movie!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (postToEdit != null)
+            {
+                post.UpdatePost(postToEdit, model);
+            }
+
+            //TempData["edit"] = "Movie information updated successfully, awaiting approval!";
+            return RedirectToAction("Profile", "User", new { id = currentUserId });
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var postToDelete = post.GetPost(id);
+            var currentUserId = User.Id();
+
+            if (postToDelete?.UserId != currentUserId)
+            {
+                //TempData["error"] = "You cannot edit this movie!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (postToDelete != null)
+            {
+                post.RemovePost(postToDelete);
+            }
+
+            //TempData["delete"] = "Post removed successfully!";
+            return RedirectToAction("Profile", "User", new { id = currentUserId });
         }
     }
 }

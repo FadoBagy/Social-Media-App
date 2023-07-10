@@ -1,0 +1,25 @@
+﻿@model FormPostModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div>
+    <form asp-action="Edit" asp-controller="Post" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Caption"></label>
+            <textarea asp-for="Caption" rows="3"></textarea>
+            <span asp-validation-for="Caption" class="text-danger"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
