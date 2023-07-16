@@ -1,6 +1,5 @@
 ﻿namespace Social_Media_App.Controllers
 {
-    using Humanizer.Localisation;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Social_Media_App.Infrastructure.Extensions;
