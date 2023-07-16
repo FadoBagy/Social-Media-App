@@ -3,6 +3,7 @@
     public enum HubType
     {
         Chat = 1,
-        Notification = 2
+        Notification = 2,
+        Post = 3
     }
 }

@@ -17,6 +17,10 @@
     }
 
     .post .info {
+        justify-content: center !important;
+    }
+
+    .post .info .details {
         flex-direction: column;
         gap: 3px;
     }

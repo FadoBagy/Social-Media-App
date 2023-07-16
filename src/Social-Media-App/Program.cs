@@ -84,31 +84,32 @@ namespace Social_Media_App
             }
 
             if (app.Environment.IsDevelopment())
-                {
-                    app.UseMigrationsEndPoint();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/Home/Error");
-                    app.UseHsts();
-                }
+            {
+                app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
 
-                app.UseHttpsRedirection();
-                app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-                app.UseRouting();
+            app.UseRouting();
 
-                app.UseAuthentication();
-                app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
           
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapHub<ChatHub>("/chathub");
-                    endpoints.MapHub<NotificationHub>("/notificationhub");
-                    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute("user", "{controller=User}/{action=Details}/{id?}");
-                    endpoints.MapRazorPages();
-                });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<NotificationHub>("/notificationhub");
+                endpoints.MapHub<PostHub>("/postshub");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("user", "{controller=User}/{action=Details}/{id?}");
+                endpoints.MapRazorPages();
+            });
         }
     }
 }
