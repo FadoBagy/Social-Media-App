@@ -8,10 +8,14 @@
         public void AddPost(Post post);
         public void RemovePost(Post post);
         public void UpdatePost(Post post, FormPostModel model);
+        public Task LikePost(int postId, string userId);
+        public Task UnlikePost(int postId, string userId);
         public Post CreatePost(string imagePath, string? caption, string userId);
         public Post GetPost(int id);
+        public Task<PostViewModel> GetPostForSingleView(int postId, string userId);
+        public int GetPostLikeCount(int postId);
         public List<GalleryPostViewModel> GetPostsForGalleryByUserId(string userId);
-        public List<PostViewModel> GetPostsByUserId(string userId);
-        public List<PostViewModel> GetAllPosts();
+        public Task<List<PostViewModel>> GetAllPostsForUserFeed(string userId);
+        public bool PostIsLikedByUser(int postId, string userId);
     }
 }

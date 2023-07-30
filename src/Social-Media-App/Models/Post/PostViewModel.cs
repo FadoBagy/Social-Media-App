@@ -8,9 +8,12 @@
         public string ImagePath { get; set; }
         public string? Caption { get; set; }
         public DateTime CreationDate { get; set; }
-        public List<Like> Likes { get; set; }
-        public List<Comment> Comments { get; set; }
+        //public List<Like> Likes { get; set; }
+        //public List<Comment> Comments { get; set; }
+        public int LikeCount { get; set; }
+        public int CommentCount { get; set; }
         public User User { get; set; }
         public bool IsSinglePost { get; set; } = false;
+        public bool IsLikedByCurrentUser { get; set; }
     }
 }

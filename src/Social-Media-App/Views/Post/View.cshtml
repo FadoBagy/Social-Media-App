@@ -1,4 +1,5 @@
 ﻿@model PostViewModel
+@inject UserManager<User> UserManager
 @{
     string username = Model.User.UserName[..Model.User.UserName.IndexOf('@')];
     string titleCaption =
@@ -17,14 +18,33 @@
 }
 
 <section class="main-container">
-    <partial name="Post/_PostPartial" model="@Model" />
+    <partial name="Post/_PostLoadingIndicatorPartial" />
+    @if (Model.IsSinglePost && UserManager.GetUserId(User) == Model.User.Id)
+    {
+        <div class="options-panel">
+            <div class="panel">
+                <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id">
+                    Change Caption
+                </a>
+                <form asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id">
+                    <div>
+                        <input type="submit"
+                           value="Delete Permanently"
+                           onclick="return confirm('Are you sure you want to DELETE this post')" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
 </section>
 
 @section Styles {
     <link rel="stylesheet" href="~/css/post/post.css" />
     <link rel="stylesheet" href="~/css/home/feed.css" />
+    <link rel="stylesheet" href="~/css/home/postTemplate.css" />
 }
 @section Scripts {
-    <script src="~/js/post/optionsPanel.js"></script>
-    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="module" src="~/js/post/postHubSetup.js"></script>
 }

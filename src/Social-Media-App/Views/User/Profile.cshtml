@@ -13,16 +13,11 @@
         }
     </section>
     <section class="user-posts">
-        @if (Model?.Posts.Count > 0)
+        @for (int i = 0; i < 3; i++)
         {
-            @foreach (var post in Model.Posts)
-            {
-                <partial name="Post/_PostGalleryPartial" model="@post" />
-            }
-        }
-        else
-        {
-            <p>No posts yet..</p>
+            <article class="post loading-indicator">
+                <div class="gradient-container"></div>
+            </article>
         }
     </section>
 </section>
@@ -30,4 +25,10 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/user/profileGallery.css" />
     <link rel="stylesheet" href="~/css/user/userProfile.css" />
+    <link rel="stylesheet" href="~/css/home/postTemplate.css" />
+}
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="module" src="~/js/post/postHubSetup.js"></script>
 }

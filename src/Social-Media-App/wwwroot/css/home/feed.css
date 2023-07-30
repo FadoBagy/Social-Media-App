@@ -172,3 +172,7 @@
 .panel input:hover {
     background-color: #22283125;
 }
+
+.liked {
+    filter: invert(43%) sepia(100%) saturate(7467%);
+}
