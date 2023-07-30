@@ -1,31 +1,6 @@
-﻿const connection = new signalR.HubConnectionBuilder().withUrl('/postshub').build();
-const templatePostElements = document.querySelectorAll('.loadingIndicator');
+const templatePostElements = document.querySelectorAll('.loading-indicator');
 
-connection.on('ReceivePosts', (posts) => {
-    const postsElement = document.querySelector('.posts');
-
-    hideAllTemplatePosts();
-
-    if (posts.length > 0) {
-        posts.forEach((post) => {
-            postsElement.appendChild(createPostElement(post));
-        });
-    } else {
-        postsElement.innerHTML = "<p>No posts available.</p>";
-    }
-});
-
-connection.start()
-    .then(() => {
-        showAllTemplatePosts();
-        return connection.invoke("GetPosts");
-    })
-    .then(() => {
-        hideAllTemplatePosts();
-    })
-    .catch((error) => console.error(error.toString()));
-
-function createPostElement(post) {
+function createPostElement(post, currentUserId) {
     const username = post.user.userName.substring(0, post.user.userName.indexOf('@'));
 
     const postElement = document.createElement('article');
@@ -77,12 +52,17 @@ function createPostElement(post) {
 
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'actions';
+    actionsDiv.dataset.postId = post.id;
 
     const likeDiv = document.createElement('div');
     const likeImage = document.createElement('img');
+    likeImage.className = 'like-btn';
+    if (post.isLikedByCurrentUser) {
+        likeImage.classList.add('liked');
+    }
     likeImage.src = '/img/feed/like.png';
     const likeCountParagraph = document.createElement('p');
-    likeCountParagraph.textContent = post.likes.length.toString();
+    likeCountParagraph.textContent = post.likeCount.toString();
     likeDiv.appendChild(likeImage);
     likeDiv.appendChild(likeCountParagraph);
 
@@ -90,7 +70,7 @@ function createPostElement(post) {
     const commentImage = document.createElement('img');
     commentImage.src = '/img/feed/comment.png';
     const commentCountParagraph = document.createElement('p');
-    commentCountParagraph.textContent = post.comments.length.toString();
+    commentCountParagraph.textContent = post.commentCount.toString();
     commentDiv.appendChild(commentImage);
     commentDiv.appendChild(commentCountParagraph);
 
@@ -141,7 +121,66 @@ function createPostElement(post) {
     postElement.appendChild(captionDiv);
     postElement.appendChild(commentsPreviewDiv);
 
+    if (post.isSinglePost && currentUserId == post.user.id) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'options';
+
+        const settingsImage = document.createElement('img');
+        settingsImage.setAttribute('src', '/img/feed/settings-dots.png');
+
+        optionsDiv.appendChild(settingsImage);
+        infoDiv.appendChild(optionsDiv);
+    }
+
     return postElement;
+}
+
+function createGalleryPostElement(post) {
+    const article = document.createElement('article');
+    article.classList.add('post');
+
+    const anchor = document.createElement('a');
+    anchor.href = `/Post/View/${post.id}`;
+    article.appendChild(anchor);
+
+    const image = document.createElement('img');
+    image.classList.add('post-image');
+    image.setAttribute('src', `/uploads/${post.imagePath}`);
+    image.setAttribute('alt', 'Post image');
+    article.appendChild(image);
+
+    const postStats = document.createElement('div');
+    postStats.classList.add('post-stats');
+
+    const likeCountDiv = document.createElement('div');
+    const likeCountImage = document.createElement('img');
+    likeCountImage.setAttribute('src', '/img/feed/like.png');
+    const likeCountText = document.createElement('p');
+    likeCountText.textContent = post.likeCount;
+    likeCountDiv.appendChild(likeCountImage);
+    likeCountDiv.appendChild(likeCountText);
+    postStats.appendChild(likeCountDiv);
+
+    const commentCountDiv = document.createElement('div');
+    const commentCountImage = document.createElement('img');
+    commentCountImage.setAttribute('src', '/img/feed/comment.png');
+    const commentCountText = document.createElement('p');
+    commentCountText.textContent = post.commentCount;
+    commentCountDiv.appendChild(commentCountImage);
+    commentCountDiv.appendChild(commentCountText);
+    postStats.appendChild(commentCountDiv);
+
+    const shareCountDiv = document.createElement('div');
+    const shareCountImage = document.createElement('img');
+    shareCountImage.setAttribute('src', '/img/feed/share.png');
+    const shareCountText = document.createElement('p');
+    shareCountText.textContent = '20k';
+    shareCountDiv.appendChild(shareCountImage);
+    shareCountDiv.appendChild(shareCountText);
+    postStats.appendChild(shareCountDiv);
+
+    article.appendChild(postStats);
+    return article;
 }
 
 function hideAllTemplatePosts() {
@@ -155,3 +194,5 @@ function showAllTemplatePosts() {
         template.style.display = 'flex';
     });
 }
+
+export { createPostElement, hideAllTemplatePosts, showAllTemplatePosts, createGalleryPostElement };

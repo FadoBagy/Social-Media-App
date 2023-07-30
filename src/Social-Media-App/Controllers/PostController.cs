@@ -52,11 +52,7 @@
             return View(new PostViewModel
             {
                 Id = currentPost.Id,
-                ImagePath = currentPost.ImagePath,
                 Caption = currentPost.Caption,
-                CreationDate = currentPost.CreationDate,
-                Likes = currentPost.Likes,
-                Comments = currentPost.Comments,
                 User = currentPost.User,
                 IsSinglePost = true
             });
@@ -105,7 +101,6 @@
             //TempData["edit"] = "Movie information updated successfully, awaiting approval!";
             return RedirectToAction("Profile", "User", new { id = currentUserId });
         }
-
 
         [HttpPost]
         public IActionResult Delete(int id)

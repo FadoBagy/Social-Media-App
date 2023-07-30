@@ -6,7 +6,9 @@
     {
         public int Id { get; set; }
         public string ImagePath { get; set; }
-        public List<Like> Likes { get; set; }
-        public List<Comment> Comments { get; set; }
+        public int LikeCount { get; set; }
+        public int CommentCount { get; set; }
+        //public List<Like> Likes { get; set; }
+        //public List<Comment> Comments { get; set; }
     }
 }

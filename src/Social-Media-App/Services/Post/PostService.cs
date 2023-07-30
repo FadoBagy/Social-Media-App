@@ -32,6 +32,38 @@
             data.SaveChanges();
         }
 
+        public async Task LikePost(int postId, string userId)
+        {
+            var likedPost = data.Posts
+                .Include(p => p.Likes)
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (likedPost != null && !likedPost.Likes.Any(l => l.UserId == userId))
+            {
+                likedPost.Likes.Add(new Like
+                {
+                    PostId = postId,
+                    UserId = userId
+                });
+
+                await data.SaveChangesAsync();
+            }
+        }
+
+        public async Task UnlikePost(int postId, string userId)
+        {
+            var unlikedPost = data.Posts
+                .Include(p => p.Likes)
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (unlikedPost != null && unlikedPost.Likes.Any(l => l.UserId == userId))
+            {
+                var likeToBeRemoved = unlikedPost.Likes.FirstOrDefault(l => l.UserId == userId);
+                unlikedPost.Likes.Remove(likeToBeRemoved);
+                await data.SaveChangesAsync();
+            }
+        }
+
         public Post CreatePost(string imagePath, string? caption, string userId)
         {
             return new Post
@@ -46,7 +78,45 @@
         {
             return data.Posts
                 .Include(p => p.User)
+                .Include(p => p.Likes)
+                .Include(p => p.Comments)
                 .FirstOrDefault(p => p.Id == id);
+        }
+
+        public async Task<PostViewModel> GetPostForSingleView(int postId, string userId)
+        {
+            return await data.Posts
+                .Include(p => p.User)
+                .Include(p => p.Likes)
+                .Include(p => p.Comments)
+                .Where(p => p.Id == postId)
+                .Select(p => new PostViewModel
+                {
+                    Id = p.Id,
+                    ImagePath = p.ImagePath,
+                    Caption = p.Caption,
+                    CreationDate = p.CreationDate,
+                    LikeCount = p.Likes.Count,
+                    CommentCount = p.Comments.Count,
+                    User = p.User,
+                    IsLikedByCurrentUser = p.Likes.Any(l => l.UserId == userId),
+                    IsSinglePost = true
+                })
+                .FirstOrDefaultAsync();
+        }
+
+        public int GetPostLikeCount(int postId)
+        {
+            var currentPost = data.Posts
+                .Include(p => p.Likes)
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (currentPost != null)
+            {
+                return currentPost.Likes.Count;
+            }
+
+            return 0;
         }
 
         public List<GalleryPostViewModel> GetPostsForGalleryByUserId(string userId)
@@ -58,43 +128,47 @@
                 {
                     Id = p.Id,
                     ImagePath = p.ImagePath,
-                    Likes = p.Likes,
-                    Comments = p.Comments
+                    LikeCount = p.Likes.Count,
+                    CommentCount = p.Comments.Count
                 })
                 .ToList();
         }
 
-        public List<PostViewModel> GetPostsByUserId(string userId)
+        public async Task<List<PostViewModel>> GetAllPostsForUserFeed(string userId)
         {
-            return data.Posts
-                .Where(p => p.UserId == userId)
+            var posts = await data.Posts
+                .Include(p => p.Likes)
                 .OrderByDescending(p => p.CreationDate)
                 .Select(p => new PostViewModel
                 {
+                    Id = p.Id,
                     ImagePath = p.ImagePath,
                     Caption = p.Caption,
                     CreationDate = p.CreationDate,
-                    Likes = p.Likes,
-                    Comments = p.Comments
+                    LikeCount = p.Likes.Count,
+                    CommentCount = p.Comments.Count,
+                    User = p.User,
+                    IsLikedByCurrentUser = p.Likes.Any(l => l.UserId == userId)
                 })
-                .ToList();
+                .ToListAsync();
+
+            return posts;
         }
 
-        public List<PostViewModel> GetAllPosts()
+        public bool PostIsLikedByUser(int postId, string userId)
         {
-            return data.Posts
-                .Include(p => p.User)
-                .OrderByDescending(p => p.CreationDate)
-                .Select(p => new PostViewModel
-                {
-                    ImagePath = p.ImagePath,
-                    Caption = p.Caption,
-                    CreationDate = p.CreationDate,
-                    Likes = p.Likes,
-                    Comments = p.Comments,
-                    User = p.User
-                })
-                .ToList();
+            var currentPost = data.Posts
+                .Include(p => p.Likes)
+                .FirstOrDefault(p => p.Id == postId);
+
+            if (currentPost != null && currentPost.Likes.Any(l => l.UserId == userId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -8,3 +8,7 @@
 .user-info h2{
     margin: 0;
 }
+
+.gradient-container {
+    border-radius: 5px;
+}

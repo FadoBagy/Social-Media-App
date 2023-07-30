@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Shared\Post\_PostLoadingIndicatorPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.7" />
@@ -27,6 +31,18 @@
   <ItemGroup>
     <Folder Include="wwwroot\uploads\" />
     <Folder Include="wwwroot\uploads\eef6ef88-8194-4b5a-ac6c-2c578f550256\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Post\_PostLoadingIndicatorPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\Post\_PostLoadingIndicatorPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\Post\_PostLoadingIndicatorPartial.cshtml" />
   </ItemGroup>
 
 </Project>
